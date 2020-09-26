@@ -82,7 +82,7 @@ uint8_t SerialRAM::readControlRegister() {
 	uint8_t buffer = 0x80;
 
 	Wire.beginTransmission(this->CONTROL_REGISTER);
-	Wire.write(0x00); //status register
+	Wire.write((byte)0x00); //status register
 	Wire.endTransmission();
 
 	Wire.requestFrom(this->CONTROL_REGISTER, 1);
@@ -101,7 +101,7 @@ void SerialRAM::setAutoStore(const bool value)
 	uint8_t buffer = this->readControlRegister();
 	buffer = value ? buffer|0x02 : buffer&0xfd;
 	Wire.beginTransmission(this->CONTROL_REGISTER);
-	Wire.write(0x00); //status register
+	Wire.write((byte)0x00); //status register
 	Wire.write(buffer);
 	Wire.endTransmission();
 }
